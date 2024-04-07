@@ -1,11 +1,11 @@
-#include <iostream>
+﻿#include <iostream>
 
 int main()
 {
 	std::ios_base::sync_with_stdio(false);
 	std::cin.tie(nullptr);
 
-	// �迭 �ʱ�ȭ ��, ù ���Ҹ� 0���� �ʱ�ȭ�ϸ�, �������鵵 �� 0���� �ʱ�ȭ��
+	// 배열 초기화 시, 첫 원소를 0으로 초기화하면, 나머지들도 다 0으로 초기화됨
 	char arr[100][100] = { 0 };
 
 	int N, x, y;
@@ -14,7 +14,7 @@ int main()
 	{
 		std::cin >> x >> y;
 		
-		// ĳ�� ���߷��� ���� �̳ʷ����� ������
+		// 캐시 적중률을 위해 이너루프는 열루프
 		for (int k = y; k < y + 10; k++)
 		{
 			for (int j = x; j < x + 10; j++)

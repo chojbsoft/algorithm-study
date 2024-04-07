@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -25,15 +25,15 @@ int main()
 		string temp;
 		for (int j = 0; j < remain; j++)
 		{
-			// +=´Â push_back, append È£ÃâÇÏ´Â ¿¬»êÀÚ ¿À¹ö·Îµù
-			// push_backÀº Ä³¸¯ÅÍ
-			// append´Â ¹®ÀÚ¿­
+			// +=ëŠ” push_back, append í˜¸ì¶œí•˜ëŠ” ì—°ì‚°ìž ì˜¤ë²„ë¡œë”©
+			// push_backì€ ìºë¦­í„°
+			// appendëŠ” ë¬¸ìžì—´
 			temp += ' ';
 		}
 
 		ans.insert(0, temp);
 
-		// ¿À¸¥ÂÊÀº °ø¹éÀº ¾ð±ÞÀÌ µû·Î ¾ø¾úÀ¸¹Ç·Î ¾È³ÖÀ½
+		// ì˜¤ë¥¸ìª½ì€ ê³µë°±ì€ ì–¸ê¸‰ì´ ë”°ë¡œ ì—†ì—ˆìœ¼ë¯€ë¡œ ì•ˆë„£ìŒ
 		//ans += temp;
 		
 		cout << ans;

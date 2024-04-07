@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -16,7 +16,7 @@ int main()
 	string str;
 	cin >> str;
 
-	// Ç×»ó ÀÔ·ÂÀÇ ÃÖ¼Ò, ÃÖ´ë Á¶½ÉÇÏ±â
+	// í•­ìƒ ìž…ë ¥ì˜ ìµœì†Œ, ìµœëŒ€ ì¡°ì‹¬í•˜ê¸°
 	if (str.size() == 1)
 	{
 		if (str[0] >= 'a')
@@ -32,7 +32,7 @@ int main()
 	size_t size = str.size();
 	for (int i = 0; i < size; i++)
 	{
-		// '0'Àº 48, 'A'´Â 65, 'a'´Â 97
+		// '0'ì€ 48, 'A'ëŠ” 65, 'a'ëŠ” 97
 		if (str[i] >= 'a')
 		{
 			str[i] -= 32;
@@ -41,10 +41,10 @@ int main()
 		m[str[i]]++;
 	}
 
-	// map ÄÁÅ×ÀÌ³Ê´Â ÀÚµ¿Á¤·ÄÀÌ°í, Ã³À½ ¼±¾ð ½Ã¿¡ Á¤·Ä ±ÔÄ¢Àº Å° °ªÀ¸·Î¸¸ °¡´ÉÇÔ
-	// sort ÇÔ¼ö¿¡ »ç¿ëÇÒ ÄÁÅ×ÀÌ³Ê´Â ÀÓÀÇ Á¢±Ù ¹Ýº¹ÀÚ°¡ ÀÖ¾î¾ßÇÏ´Âµ¥, map·ù´Â ¾ç¹æÇâ Á¢±Ù ¹Ýº¹ÀÚ
-		// auto it = m.begin() + 2; ÀÌ·± ¹®Àå ¾ÈµÊ
-	// µû¶ó¼­ vector¿¡ ¿Å°Ü¼­ sort È°¿ë
+	// map ì»¨í…Œì´ë„ˆëŠ” ìžë™ì •ë ¬ì´ê³ , ì²˜ìŒ ì„ ì–¸ ì‹œì— ì •ë ¬ ê·œì¹™ì€ í‚¤ ê°’ìœ¼ë¡œë§Œ ê°€ëŠ¥í•¨
+	// sort í•¨ìˆ˜ì— ì‚¬ìš©í•  ì»¨í…Œì´ë„ˆëŠ” ìž„ì˜ ì ‘ê·¼ ë°˜ë³µìžê°€ ìžˆì–´ì•¼í•˜ëŠ”ë°, mapë¥˜ëŠ” ì–‘ë°©í–¥ ì ‘ê·¼ ë°˜ë³µìž
+		// auto it = m.begin() + 2; ì´ëŸ° ë¬¸ìž¥ ì•ˆë¨
+	// ë”°ë¼ì„œ vectorì— ì˜®ê²¨ì„œ sort í™œìš©
 	vector<pair<char, int>> v;
 	v.reserve(m.size());
 	for (auto& p : m)
@@ -52,13 +52,13 @@ int main()
 		v.push_back(p);
 	}
 
-	// Predicate ºñ±³ ÇÔ¼ö Á¤ÀÇÇØ¼­ ³Ö±â
+	// Predicate ë¹„êµ í•¨ìˆ˜ ì •ì˜í•´ì„œ ë„£ê¸°
 	sort(v.begin(), v.end(), comp);
 
 	auto it = v.begin();
 	char ans = it->first;
 	
-	// ÁöÁ¤ ¿¬»êÀÚ°¡ ÀüÀ§ ¿¬»êÀÚº¸´Ù ¿ì¼±¼øÀ§°¡ ³ô±â ¶§¹®¿¡ °ýÈ£
+	// ì§€ì • ì—°ì‚°ìžê°€ ì „ìœ„ ì—°ì‚°ìžë³´ë‹¤ ìš°ì„ ìˆœìœ„ê°€ ë†’ê¸° ë•Œë¬¸ì— ê´„í˜¸
 	if (it->second == (++it)->second)
 	{
 		cout << '?';
