@@ -7,10 +7,10 @@
 
 using namespace std;
 
-// ÃÖ´ë °ø¾à¼ö
-// À¯Å¬¸®µå È£Á¦¹ı ÀÌ¿ë
-// Æ¯Á¤ ¼ö¿Í 0ÀÇ ÃÖ´ë °ø¾à¼ö´Â Æ¯Á¤ ¼ö¶ó´Â °É ÀÌ¿ëÇÑ ¹æ¹ı
-// a¿Í bÀÇ ÃÖ´ë°ø¾à¼ö´Â b¿Í a%bÀÇ ÃÖ´ë°ø¾à¼ö¿Í °°À½
+// ìµœëŒ€ ê³µì•½ìˆ˜
+// ìœ í´ë¦¬ë“œ í˜¸ì œë²• ì´ìš©
+// íŠ¹ì • ìˆ˜ì™€ 0ì˜ ìµœëŒ€ ê³µì•½ìˆ˜ëŠ” íŠ¹ì • ìˆ˜ë¼ëŠ” ê±¸ ì´ìš©í•œ ë°©ë²•
+// aì™€ bì˜ ìµœëŒ€ê³µì•½ìˆ˜ëŠ” bì™€ a%bì˜ ìµœëŒ€ê³µì•½ìˆ˜ì™€ ê°™ìŒ
 int gcd(int a, int b)
 {
 	if (b == 0)
@@ -20,14 +20,14 @@ int gcd(int a, int b)
 	return gcd(b, a % b);
 }
 
-// ÃÖ¼Ò °ø¹è¼ö
+// ìµœì†Œ ê³µë°°ìˆ˜
 int lcm(int a, int b)
 {
 	return a * b / gcd(a, b);
 }
 
-// ¼Ò¼ö È®ÀÎ
-// 2ºÎÅÍ Å¸°ÙÀÇ Á¦°ö±Ù±îÁö(Æ÷ÇÔ) ³ª´²Áö´ÂÁö È®ÀÎ
+// ì†Œìˆ˜ í™•ì¸
+// 2ë¶€í„° íƒ€ê²Ÿì˜ ì œê³±ê·¼ê¹Œì§€(í¬í•¨) ë‚˜ëˆ ì§€ëŠ”ì§€ í™•ì¸
 bool isPrime(int num)
 {
 	if (num <= 1)
@@ -47,9 +47,9 @@ bool isPrime(int num)
 	return true;
 }
 
-// ¼Ò¼ö ¸ğµÎ ±¸ÇÏ±â
-// ¿¡¶óÅä½ºÅ×³×½ºÀÇ Ã¼
-// 2ºÎÅÍ n±îÁö ÀÚ±âÀÚ½ÅÀ» Á¦¿ÜÇÑ ¸ğµç ¹è¼ö¸¦ Á¦°Å
+// ì†Œìˆ˜ ëª¨ë‘ êµ¬í•˜ê¸°
+// ì—ë¼í† ìŠ¤í…Œë„¤ìŠ¤ì˜ ì²´
+// 2ë¶€í„° nê¹Œì§€ ìê¸°ìì‹ ì„ ì œì™¸í•œ ëª¨ë“  ë°°ìˆ˜ë¥¼ ì œê±°
 vector<int> era(int n)
 {
 	vector<int> res;
@@ -81,55 +81,83 @@ vector<int> era(int n)
 	return res;
 }
 
-// nÁø¼ö º¯È¯
-// 0ÀÌ µÇ±â Àü±îÁö NÀ¸·Î ³ª´« ³ª¸ÓÁöÀÇ ¿ª¼ø
-vector<int> toBinary(int num)
+#include <iostream>
+#include <stack>
+void BToDecimal()
 {
-	vector<int> res;
-	while (1)
+	char temp;
+	stack<char> Stack;
+	while (cin.get(temp))
 	{
-		if (num == 0)
+		// ê³µë°± ì…ë ¥ì´ ë“¤ì–´ì˜¤ë©´ break
+		// ê³µë°±ì€ 0ì´ ì•„ë‹Œ 32
+		if (temp == ' ')
 		{
 			break;
 		}
-		res.push_back(num % 2);
-		num = num / 2;
+
+		Stack.push(temp);
 	}
-	reverse(res.begin(), res.end());
 
-	return res;
-}
+	int B;
+	cin >> B;
 
-// 16Áø¼ö º¯È¯Àº ¾Æ½ºÅ°ÄÚµå ½Å°æ¾²±â
-vector<char> toHex(int num)
-{
-	vector<char> res;
-	while (1)
+	int Sum = 0;
+	int Pos = 0;
+	while (!Stack.empty())
 	{
-		if (num == 0)
+		int Element = Stack.top();
+		if (Element < 65)
 		{
-			break;
-		}
-		auto val = num % 16;
-		if (val < 10)
-		{
-			res.push_back(val + 48);
+			Element -= 48;
 		}
 		else
 		{
-			res.push_back(val + 55);
+			Element = Element - 65 + 10;
 		}
-		num = num / 16;
-	}
-	reverse(res.begin(), res.end());
 
-	return res;
+		Sum += Element * pow(B, Pos++);
+		Stack.pop();
+	}
+
+	cout << Sum;
+}
+
+#include <iostream>
+#include <stack>
+void DecimalToB(int N, int B)
+{
+	stack<char> RemainderStack;
+	while (N != 0)
+	{
+		int Remainder = N % B;
+
+		// ë‚˜ë¨¸ì§€ê°€ 10ì´ìƒì´ë¼ëŠ” ê²ƒì€ BëŠ” 11 ì´ìƒì´ë¼ëŠ” ê²ƒ
+		// ì•„ìŠ¤í‚¤ì½”ë“œ ë³€í™˜ì— ë”°ë¼ 10ì„ ë¹¼ì£¼ê³  65ë¥¼ ë”í•´ì„œ, 10ì´ Aì— ë§¤ì¹­ë˜ê²Œë” offset ì¡°ì •
+		if (Remainder >= 10)
+		{
+			Remainder = Remainder - 10 + 65;
+		}
+		else
+		{
+			Remainder += 48;
+		}
+		RemainderStack.push(Remainder);
+
+		N = N / B;
+	}
+
+	while (!RemainderStack.empty())
+	{
+		cout << RemainderStack.top();
+		RemainderStack.pop();
+	}
 }
 
 // Rotate
-// ¹İÈ¯ÇÏ°í ½ÍÀ»¶§´Â, ÆÄ¶ó¹ÌÅÍ·Î ¹İÈ¯¹Ş¾Æ¾ß, ·¹ÆÛ·±½º º¯¼ö·Î ¹İÈ¯¹Ş¾Æ¼­ º¹»ç ºñ¿ë ÁÙÀÏ ¼ö ÀÖÀ½
-// ±âº» ¹İÈ¯ÇüÀ¸·Î ¹İÈ¯¹ŞÀ¸¸é, ·¹ÆÛ·±½º º¯¼ö¸¦ »ç¿ëÇÒ ¼ö ¾øÀ½
-// Áö¿ªº¯¼öÀÇ ·¹ÆÛ·±½º¸¦ ¹İÈ¯ÇØºÃÀÚ ¼Ò¸êµÇ±â ¶§¹®
+// ë°˜í™˜í•˜ê³  ì‹¶ì„ë•ŒëŠ”, íŒŒë¼ë¯¸í„°ë¡œ ë°˜í™˜ë°›ì•„ì•¼, ë ˆí¼ëŸ°ìŠ¤ ë³€ìˆ˜ë¡œ ë°˜í™˜ë°›ì•„ì„œ ë³µì‚¬ ë¹„ìš© ì¤„ì¼ ìˆ˜ ìˆìŒ
+// ê¸°ë³¸ ë°˜í™˜í˜•ìœ¼ë¡œ ë°˜í™˜ë°›ìœ¼ë©´, ë ˆí¼ëŸ°ìŠ¤ ë³€ìˆ˜ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŒ
+// ì§€ì—­ë³€ìˆ˜ì˜ ë ˆí¼ëŸ°ìŠ¤ë¥¼ ë°˜í™˜í•´ë´¤ì ì†Œë©¸ë˜ê¸° ë•Œë¬¸
 void rotate90(int row, int col, vector<vector<int>>& v, vector<vector<int>>& v2)
 {
 	for (int i = 0; i < row; i++)
@@ -176,6 +204,6 @@ void DoRotate90()
 
 int main()
 {
-	
+
 	return 0;
 }
